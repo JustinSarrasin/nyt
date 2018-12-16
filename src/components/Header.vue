@@ -2,13 +2,13 @@
   <div class="header">
     <h1>New York Times</h1>
     <form v-on:change.prevent="getNews">
-      <select v-model="selected" v-on:change="handleChange"  id="asdf">
-        <option v-for="item in categories" v-bind:key=item>{{ item.category }}</option>
+      <select v-model="selected" id="asdf">
+        <option v-for="item in categories" :key='item.category'>{{ item.category }}</option>
       </select>
     </form>
 
     <ul>
-      <li v-for="(data, index) in filteredArticles" :key=index>
+      <li v-for="(data, index) in filteredArticles" :key='index.data'>
           <h3>{{ data.title }}</h3>
           <p>{{ data.abstract }}</p>
           <a :href='data.url' target="_blank">See full article here</a>
