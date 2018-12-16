@@ -1,53 +1,71 @@
 <template>
   <div class="header">
-    <h1 class="display-4 text-xs-center font-weight-light">New York Times</h1>
+
+    <v-img
+    v-for="(item,i) in pics"
+    :key="i"
+    :src="item.src"></v-img>
+
+    <!-- <div>
+    <img src="src/assets/The_New_York_Times_logo.png" alt="">
+
+    </div> -->
+    <!-- <v-img
+      src="require('src/assets/The_New_York_Times_logo.png')" 
+      height:
+    >
+    </v-img> -->
+    <h1 class="display-3 text-xs-center font-weight-light mt-1">Latest News</h1>
     <form v-on:change.prevent="getNews">
       <select v-model="selected" id="asdf">
         <option v-for="item in categories" :key='item.category'>{{ item.category }}</option>
       </select>
     </form>
 
-    <v-container fluid grid-list-xl>
-    <v-layout wrap align-center>
-      <v-flex xs12 sm6 d-flex>
-        <v-select v-model="selected" id="asdf">
-          <option v-for="item in categories" :key='item.category'>{{ item.category }}</option>
-      </v-select>
-        
-        <!-- <v-select
+    <!-- <v-container fluid>
+      <v-layout row wrap align-center>
+        <v-flex xs6> -->
+          <div style="width: 100px">
+            <v-form @change="getNews">
+              <v-select
+                :items="choices"
+                v-model="selected"
+                menu-props="auto"
+                label="Choose A Category"
           
-          :items="item in category"
-          label="Select Category"
-          solo
-        ></v-select> -->
-      </v-flex>
+              ></v-select>
+            </v-form>
+          </div>
+        <!-- </v-flex>
+      </v-layout>
+    </v-container> -->
+
+ 
 
 
       <v-flex>
-        <ul style="list-style-type: none; padding: 0">
-          <li v-for="(data, index) in filteredArticles" :key='index.data'>
-            <v-card class="elevation-20">
-              <v-card-title>{{ data.title }}</v-card-title>
+        <ul class="mab-100" style="list-style-type: none; padding: 0">
+          <li class="mab-100" v-for="(data, index) in filteredArticles" :key='index.data'>
+            <v-card class="elevation-10 mb-2">
+              <v-card-title class="title">{{ data.title }}</v-card-title>
               <v-card-text class="pl-80">{{ data.abstract }}</v-card-text>
-              <v-card-actions class="pl-8">
-                <a class="pl-8" :href='data.url' target="_blank">See full article here</a>
-              </v-card-actions>
+              <!-- <v-hover> -->
+                <v-card-actions class="pl-8 red--text" >
+                  <a class="pl-2 red--text " style="text-decoration:none"  :href='data.url' target="_blank">See full article here</a>
+                </v-card-actions>
+              <!-- </v-hover> -->
             </v-card>
           </li>
         </ul>
-        <!-- <v-img
-          src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-          aspect-ratio="2.75"
-        ></v-img> -->
+      </v-flex>
 
-    </v-flex>
-    <v-footer class="pa-3 text-xs-center " fixed>
-      <!-- <v-spacer></v-spacer> -->
-      <div class="text-xs-center">Articles Sourced From The New York Times Top Stories API  &copy; {{ new Date().getFullYear() }}</div>
-    </v-footer>
+      <v-footer class="pa-3 text-xs-center " fixed>
+        <!-- <v-spacer></v-spacer> -->
+        <div class="text-xs-center">Articles Sourced From The New York Times Top Stories API  &copy; {{ new Date().getFullYear() }}</div>
+      </v-footer>
 
-    </v-layout>
-  </v-container>
+      <!-- </v-layout>
+    </v-container> -->
   </div>
   
 </template>
@@ -61,6 +79,12 @@ export default {
     return {
       news: [],
       selected: {},
+      pics: [
+        {src: require('@/assets/The_New_York_Times_logo.png')}
+      ],
+      choices: [
+        'sports','asdfas'
+      ],
       categories: [
         { category: 'home' }, 
         { category: 'opinion' }, 
@@ -90,6 +114,7 @@ export default {
         { category: 'insider' }
       ]
     };
+    console.log('s', selected);
   },
   methods: {
     // handleChange(e) {
@@ -145,7 +170,11 @@ export default {
 </script>
 
 <style>
-
+  a:hover{
+    filter: brightness(55%);
+    /* border-bottom: 1px solid red;
+    padding-left: 8px; */
+  }
 </style>
 
 

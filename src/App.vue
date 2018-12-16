@@ -30,12 +30,13 @@ body {
 body, html {
   margin: 0;
   height: 100%;
+  /* width: 60%; */
 }
 #app {
-    width: 50%;
+    width: 55%;
 }
 
-nav {
+/* nav {
   padding: 20px 20px 20px 0;
 }
 
@@ -47,5 +48,5 @@ nav a {
   color: rgb(0, 110, 255);
   font-weight: bold;
   margin-right: 15px;
-}
+} */
 </style>
