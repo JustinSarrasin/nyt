@@ -1,23 +1,17 @@
 <template>
  <div id="app">
-   <!-- <Skills /> -->
    <Header />
-   <!-- <Test /> -->
  </div>
 </template>
 
 
 <script>
-  import Skills from './components/Skills.vue';
   import Header from './components/Header.vue';
-  // import Test from './components/Test.vue';
 
   export default {
     name: 'app',
     components: {
-      Skills,
       Header,
-      // Test
     }
   }
 </script>
