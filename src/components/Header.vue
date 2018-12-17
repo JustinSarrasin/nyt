@@ -1,21 +1,12 @@
 <template>
-  <div class="header">
+  <v-container class="header">
 
     <v-img
     v-for="(item,i) in pics"
     :key="i"
     :src="item.src"></v-img>
 
-    <!-- <div>
-    <img src="src/assets/The_New_York_Times_logo.png" alt="">
-
-    </div> -->
-    <!-- <v-img
-      src="require('src/assets/The_New_York_Times_logo.png')" 
-      height:
-    >
-    </v-img> -->
-    <h1 class="display-3 text-xs-center font-weight-medium mt-1">Latest News</h1>
+    <h1 class="display-3 text-xs-center font-weight-medium mt-1" style="color: #231F20">Latest News</h1>
     <form v-on:change.prevent="getNews">
       <select v-model="selected" id="asdf">
         <option v-for="item in categories" :key='item.category'>{{ item.category }}</option>
@@ -25,17 +16,21 @@
     <!-- <v-container fluid>
       <v-layout row wrap align-center>
         <v-flex xs6> -->
-          <div style="width: 100px">
-            <v-form @change="getNews">
-              <v-select
-                :items="choices"
-                v-model="selected"
-                menu-props="auto"
-                label="Choose A Category"
-          
-              ></v-select>
-            </v-form>
-          </div>
+          <!-- <div style="width: 100px"> -->
+            <!-- <v-container>
+              <v-layout>
+                <v-form @change="getNews">
+                  <v-select
+                    :items="choices"
+                    v-model="selected"
+                    menu-props="auto"
+                    label="Choose A Category"
+              
+                  ></v-select>
+                </v-form>
+              </v-layout>
+            </v-container> -->
+          <!-- </div> -->
         <!-- </v-flex>
       </v-layout>
     </v-container> -->
@@ -46,25 +41,35 @@
       <v-flex>
         <ul style="list-style-type: none; padding: 0">
           <li  v-for="(data, index) in filteredArticles" :key='index.data'>
-            <v-card class="elevation-10 mb-2">
-              <v-card-title class="title">{{ data.title }}</v-card-title>
-              <v-layout>
-                <v-flex>
-                  <v-card-text class="pl-80">{{ data.abstract }}</v-card-text>
-                  <v-img
-                    v-for="(item,i) in pics"
-                    :key="i"
-                    :src="data.image_url"
-                    :height="200">
-                  </v-img>
-                </v-flex>
+            <v-card class="elevation-10 mb-3">
+              <v-container class="pa-0">
+              <v-card-title  class="headline font-weight-medium white--text" style="background-color: #231F20">{{ data.title }}</v-card-title>
+                <v-layout column justify-space-between="">
+                  <v-flex>
+                    <v-card-text class="body-1 mb-0">{{ data.byline }}</v-card-text>
 
-              </v-layout>
+                  </v-flex>
+                  <v-flex>
+                    <v-img
+                      align-self-end
+                      contain
+                      v-for="(item,i) in pics"
+                      :max-height="500"
+                      :key="i"
+                      :src="data.image_url"
+                      
+                      >
+                    </v-img>
+                    <v-card-text class="subheading">{{ data.abstract }}  <a class="pl-1 red--text " style="text-decoration:none"  :href='data.url' target="_blank">Read more</a>  </v-card-text>
+                  </v-flex>
+                </v-layout>
+
+              </v-container>
              
               <!-- <v-hover> -->
-                <v-card-actions class="pl-8 red--text" >
+                <!-- <v-card-actions class="pl-8 red--text" >
                   <a class="pl-2 red--text " style="text-decoration:none"  :href='data.url' target="_blank">See full article here</a>
-                </v-card-actions>
+                </v-card-actions> -->
               <!-- </v-hover> -->
             </v-card>
           </li>
@@ -79,7 +84,7 @@
 
       <!-- </v-layout>
     </v-container> -->
-  </div>
+  </v-container>
   
 </template>
 
@@ -180,6 +185,8 @@ export default {
           } 
         })
       };
+
+      console.log(posts);
 
       newArray.map(article => {
         let newObj = {};
