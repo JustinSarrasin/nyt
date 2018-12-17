@@ -15,7 +15,7 @@
       height:
     >
     </v-img> -->
-    <h1 class="display-3 text-xs-center font-weight-light mt-1">Latest News</h1>
+    <h1 class="display-3 text-xs-center font-weight-medium mt-1">Latest News</h1>
     <form v-on:change.prevent="getNews">
       <select v-model="selected" id="asdf">
         <option v-for="item in categories" :key='item.category'>{{ item.category }}</option>
@@ -44,11 +44,23 @@
 
 
       <v-flex>
-        <ul class="mab-100" style="list-style-type: none; padding: 0">
-          <li class="mab-100" v-for="(data, index) in filteredArticles" :key='index.data'>
+        <ul style="list-style-type: none; padding: 0">
+          <li  v-for="(data, index) in filteredArticles" :key='index.data'>
             <v-card class="elevation-10 mb-2">
               <v-card-title class="title">{{ data.title }}</v-card-title>
-              <v-card-text class="pl-80">{{ data.abstract }}</v-card-text>
+              <v-layout>
+                <v-flex>
+                  <v-card-text class="pl-80">{{ data.abstract }}</v-card-text>
+                  <v-img
+                    v-for="(item,i) in pics"
+                    :key="i"
+                    :src="data.image_url"
+                    :height="200">
+                  </v-img>
+                </v-flex>
+
+              </v-layout>
+             
               <!-- <v-hover> -->
                 <v-card-actions class="pl-8 red--text" >
                   <a class="pl-2 red--text " style="text-decoration:none"  :href='data.url' target="_blank">See full article here</a>
@@ -59,7 +71,8 @@
         </ul>
       </v-flex>
 
-      <v-footer class="pa-3 text-xs-center " fixed>
+    <!-- <v-divider></v-divider> -->
+      <v-footer class="mt-3 text-xs-center" style="background-color: #d1d1d1" fixed>
         <!-- <v-spacer></v-spacer> -->
         <div class="text-xs-center">Articles Sourced From The New York Times Top Stories API  &copy; {{ new Date().getFullYear() }}</div>
       </v-footer>
@@ -154,14 +167,25 @@ export default {
       let postSize = 3;
       let newArray = [];
 
+      //    limits posts to 3
       posts.slice(0, postSize).map(i => {
         return newArray.push(i);
       })
+      
+      //    grabs articles with a photo
+      for(let i = 0; i < posts.length; i++){
+        posts.map(post => {
+          if(post.multimedia[i] !== undefined){
+            post.image_url = post.multimedia[i].url
+          } 
+        })
+      };
 
       newArray.map(article => {
         let newObj = {};
         newObj[article.key] = article.value;
         return newObj;
+        console.log('newob', newObject);
       })
       return newArray;
     }
