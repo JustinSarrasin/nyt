@@ -7,11 +7,26 @@
     :src="item.src"></v-img>
 
     <h1 class="display-3 text-xs-center font-weight-medium mt-1" style="color: #231F20">Latest News</h1>
-    <form v-on:change.prevent="getNews">
+    <!-- <form v-on:change.prevent="getNews">
       <select v-model="selected" id="asdf">
         <option v-for="item in categories" :key='item.category'>{{ item.category }}</option>
       </select>
-    </form>
+    </form> -->
+
+    <v-flex xs12 sm6 d-flex>
+        <v-form>
+          <v-select
+            label="Select A Category"
+            :items='categories'
+            v-model="selected"
+            v-on:change="getNews"
+            item-text="category"
+            item-value='category'
+            solo
+ 
+          ></v-select>
+        </v-form>
+      </v-flex>
 
     <!-- <v-container fluid>
       <v-layout row wrap align-center>
@@ -96,7 +111,7 @@ export default {
   data() {
     return {
       news: [],
-      selected: {},
+      selected: '',
       pics: [
         {src: require('@/assets/The_New_York_Times_logo.png')}
       ],
@@ -152,12 +167,15 @@ export default {
       // const category = { categories }
       // console.log('cat', category);
         // console.log('e', e.target.options[e.target.options.selectedIndex].value);
-      let categorySelection = e.target.options[e.target.options.selectedIndex].value;
+      // let categorySelection = e.target.options[e.target.options.selectedIndex].value;
+      let categorySelection = e;
       // console.log(categorySelection);
       // let defaultSelection = '' ? 'home' : categorySelection;
+      // console.log('asdf', e);
 
 
       axios.get(`https://api.nytimes.com/svc/topstories/v2/${categorySelection}.json?api-key=029b8764c5c04cf8ac6370a40f8a6bf0`)
+      // axios.get(`https://api.nytimes.com/svc/topstories/v2/sports.json?api-key=029b8764c5c04cf8ac6370a40f8a6bf0`)
       .then((res) => {
         this.news = res.data.results;
       })
