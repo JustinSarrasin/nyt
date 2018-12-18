@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <!--  header  -->
     <v-img
     v-for="(item,i) in pics"
     :key="i"
@@ -7,7 +8,7 @@
 
     <h1  class="header">Latest News</h1>
   
-   <!--     vuetify select list. options going to bottom right????    -->
+   <!--     vuetify select list. options going to bottom right    -->
     
     <!-- <v-flex>
         <v-form align-center>
@@ -28,6 +29,7 @@
         </v-form>
       </v-flex> -->
 
+    <!--    news category select form     -->
     <v-container text-xs-center>
       <form v-on:change.prevent="getNews">      
         <select v-model="selected" class="dropdown">
@@ -37,7 +39,7 @@
        </form>
     </v-container>
 
-
+    <!--  main card for articles  -->
     <v-flex>
       <ul style="list-style-type: none; padding: 0; margin-bottom: 10px">
         <li  v-for="(data, index) in filteredArticles" :key='index.data'>
@@ -145,7 +147,7 @@ export default {
       posts.slice(0, postSize).map(i => {
         return newArray.push(i);
       })
-      
+    
       return newArray;
     }
   }
@@ -194,7 +196,6 @@ export default {
     box-shadow: 0 0 8px #231F20;
   }
 
-
   option {
     font-size: 10px;
     background-color: white;
@@ -202,9 +203,12 @@ export default {
 
   @media (max-width: 940px) {
     .dropdown {
-    width: 50%;
+      width: 50%;
+    }
+    .header {
+      font-size: 40px;
+    }
   }
-}
 
   @media (max-width: 600px) {
     .dropdown {
