@@ -34,60 +34,51 @@
       </v-flex> -->
 
     <v-container text-xs-center>
-      <form v-on:change.prevent="getNews">
-        <!-- <label for="">Choose CAtego</label> -->
-      
+      <form v-on:change.prevent="getNews">      
         <select v-model="selected" class="dropdown">
-          <option value="" disabled selected>Select A Category</option>
+          <option value="" disabled selected>Select A Category<span><v-icon>mdi-watch</v-icon></span></option>
           <option v-for="item in categories" :key='item.category' placeholder="asdf">{{ item.category }}</option>
          </select>
        </form>
     </v-container>
 
 
-      <v-flex>
-        <ul style="list-style-type: none; padding: 0">
-          <li  v-for="(data, index) in filteredArticles" :key='index.data'>
-            <v-card class="elevation-10 mb-3">
-              <v-container class="pa-0">
-              <v-card-title  class="headline font-weight-medium white--text" style="background-color: #231F20">{{ data.title }}</v-card-title>
-                <v-layout column justify-space-between="">
-                  <v-flex>
-                    <v-card-text class="body-1 mb-0">{{ data.byline }}</v-card-text>
-                  </v-flex>
-                  <v-flex>
-                    <v-img
-                      align-self-end
-                      contain
-                      v-for="(item,i) in pics"
-                      :max-height="500"
-                      :key="i"
-                      :src="data.image_url"
-                      >
-                    </v-img>
-                    <v-card-text class="subheading">{{ data.abstract }}  <a class="pl-1 red--text " style="text-decoration:none"  :href='data.url' target="_blank">Read more</a>  </v-card-text>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card>
-          </li>
-        </ul>
-      </v-flex>
-
-    <!-- <v-divider></v-divider> -->
-      <v-footer class="mt-3 text-xs-center" style="background-color: #d1d1d1" fixed>
-        <!-- <v-spacer></v-spacer> -->
-        <div class="text-xs-center">Articles Sourced From The New York Times Top Stories API  &copy; {{ new Date().getFullYear() }}</div>
-      </v-footer>
-    </v-container>
-  
+    <v-flex>
+      <ul style="list-style-type: none; padding: 0">
+        <li  v-for="(data, index) in filteredArticles" :key='index.data'>
+          <v-card class="elevation-10 mb-3">
+            <v-container class="pa-0">
+            <v-card-title  class="headline font-weight-medium white--text" style="background-color: #231F20">{{ data.title }}</v-card-title>
+              <v-layout column justify-space-between="">
+                <v-flex>
+                  <v-card-text class="body-1 mb-0">{{ data.byline }}</v-card-text>
+                </v-flex>
+                <v-flex>
+                  <v-img
+                    align-self-end
+                    contain
+                    v-for="(item,i) in pics"
+                    :max-height="500"
+                    :key="i"
+                    :src="data.image_url"
+                    >
+                  </v-img>
+                  <v-card-text class="subheading">{{ data.abstract }}  <a class="pl-1 red--text " style="text-decoration:none"  :href='data.url' target="_blank">Read more</a>  </v-card-text>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card>
+        </li>
+      </ul>
+    </v-flex>
+  </v-container>
 </template>
 
 <script>
 import axios from 'axios';
 
 export default {
-  name: 'Header',
+  name: 'Main',
   data() {
     return {
       news: [],
@@ -178,6 +169,8 @@ export default {
 
 <style>
   .header{
+    margin-top: 5px;
+    margin-bottom: -8px;
     font-size: 50px;
     color: #231F20;
     text-align: center;
@@ -208,7 +201,7 @@ export default {
   border-bottom: 1px solid black;
   border-color: #666666;
   padding: 9px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: medium;
   text-transform: capitalize;
   color: #666666;
@@ -246,8 +239,12 @@ export default {
 
   @media (max-width: 600px) {
     .dropdown {
-    width: 80%;
-  }
+      width: 80%;
+    } 
+    .header {
+      font-size: 30px;
+    }
+
 }
 
   div.v-input__slot {
